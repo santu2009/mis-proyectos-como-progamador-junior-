@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Para Isa — Feliz San Valentín</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg1: #fff0f2;
+            --bg2: #ffe6ea;
+            --accent: #e91e63;
+            --muted: rgba(0,0,0,0.08);
+            --column-width: 36vw; /* columna en la derecha ocupando porcentaje móvil-first */
+        }
+        /* Mobile-first layout */
+        html,body{height:100%;margin:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+        body{
+            display:flex;align-items:center;justify-content:center;
+            background: linear-gradient(180deg,var(--bg1),var(--bg2));
+            overflow:hidden;color:#611;
+        }
+
+        .stage{
+            width:100%;max-width:740px;height:100vh;position:relative;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;
+        }
+
+        .card{
+            width:100%;height:100%;border-radius:18px;position:relative;overflow:hidden;
+            background: radial-gradient(800px 400px at 10% 20%, rgba(255,200,220,0.35), transparent 20%),
+                        linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            display:flex;align-items:center;justify-content:center;padding:28px;
+        }
+
+        /* Central message */
+        .center {
+            position:relative;z-index:10;text-align:center;max-width:90%;
+        }
+
+        .title{font-family:'Great Vibes', Georgia, serif;font-size:clamp(36px,10vw,72px);color:var(--accent);margin:0;text-shadow:0 6px 18px rgba(233,30,99,0.12)}
+        .subtitle{font-size:clamp(14px,3.6vw,18px);color:#4d2121;margin-top:6px}
+
+        .cta-row{margin-top:18px;display:flex;gap:12px;justify-content:center;align-items:center}
+        .btn{background:var(--accent);color:white;padding:10px 16px;border-radius:12px;border:none;font-weight:600;box-shadow:0 8px 20px rgba(233,30,99,0.18)}
+        .btn.ghost{background:transparent;color:var(--accent);box-shadow:none;border:1px solid rgba(233,30,99,0.12)}
+
+        /* Hearts container */
+        .hearts{
+            position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden;
+        }
+
+        /* Heart element (CSS heart) */
+        .heart{
+            position:absolute; width:20px; height:20px; transform:rotate(-45deg);
+            background:#ff5a76; border-radius:2px; opacity:0.95; will-change:transform,opacity,left,top,width,height;
+            display:block;box-shadow:0 6px 14px rgba(0,0,0,0.12);border:1px solid rgba(255,255,255,0.12);
+        }
+        .heart::before,.heart::after{content:"";position:absolute;width:100%;height:100%;background:inherit;border-radius:50%}
+        .heart::before{top:-50%}
+        .heart::after{left:50%}
+
+        @keyframes floaty{0%{transform:rotate(-45deg) translateY(0) scale(1)}50%{transform:rotate(-45deg) translateY(-18px) scale(1.06)}100%{transform:rotate(-45deg) translateY(0) scale(1)}}
+
+        /* Right column where hearts will gather */
+        .column-target{
+            position:absolute;right:0;top:0;bottom:0;width:var(--column-width);pointer-events:none;z-index:6;background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 40%);
+            display:block;}
+
+        /* Message that appears during gather */
+        .left-note{position:fixed;left:6vw;top:12vh;z-index:9;transform:translateY(0);opacity:0;font-family:'Great Vibes';font-size:clamp(20px,8vw,44px);color:#8b0f37;text-shadow:0 6px 20px rgba(139,15,55,0.08);background:rgba(255,255,255,0.6);padding:8px 12px;border-radius:14px}
+
+        /* Small screen tweaks */
+        @media(min-width:800px){
+            :root{--column-width:240px}
+            .card{padding:48px}
+            .left-note{left:36px;top:40vh}
+        }
+
+        /* utilidad para ocultar elementos con transición */
+        .hidden-fade{opacity:0;transform:translateY(18px) scale(0.98);transition:opacity 420ms ease, transform 420ms ease;pointer-events:none}
+
+        /* Reveal 'te amo' styles */
+        .te-amo {
+            position:fixed;z-index:20;left:0;top:0;transform:translate(-50%,-50%) scale(0.9);
+            font-family:'Great Vibes', Georgia, serif;color:#ff1e6a;font-size:clamp(28px,10vw,64px);
+            text-align:center;padding:10px 14px;background:rgba(255,255,255,0.78);border-radius:12px;opacity:0;box-shadow:0 18px 48px rgba(0,0,0,0.12);
+            transition:opacity 400ms ease, transform 500ms cubic-bezier(.2,.9,.3,1), left 600ms ease, top 600ms ease;
+        }
+
+        .ring-heart{pointer-events:none}
+
+    </style>
+</head>
+<body>
+    <div class="stage">
+        <div class="card" id="card">
+            <div class="hearts" id="hearts"></div>
+            <div class="column-target" id="col"></div>
+
+            <div class="center">
+                <h1 class="title">i love you, Isa</h1>
+                <div class="subtitle">Un pequeño regalo para que sonrías hoy 💕</div>
+                <div class="cta-row">
+                    <button class="btn" id="surprise">Ver sorpresa</button>
+                </div>
+            </div>
+
+            <div class="left-note" id="leftNote">para mi persona favorita</div>
+        </div>
+    </div>
+
+    <audio id="song" loop>
+        <!-- Reemplaza la ruta con tu canción preferida -->
+        <source src="TU_CANCION.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const heartsEl = document.getElementById('hearts');
+        const col = document.getElementById('col');
+        const leftNote = document.getElementById('leftNote');
+        const surpriseBtn = document.getElementById('surprise');
+        const audio = document.getElementById('song');
+
+        // Generar corazones dispersos (mobile-first count)
+        const COUNT = Math.min(80, Math.floor(window.innerWidth / 4) + 20);
+        const vw = Math.max(document.documentElement.clientWidth || 320, window.innerWidth);
+        const vh = Math.max(document.documentElement.clientHeight || 600, window.innerHeight);
+
+        function rand(min,max){return min + Math.random()*(max-min)}
+
+        for(let i=0;i<COUNT;i++){
+            const d = document.createElement('div');
+            d.className='heart';
+            // initial position across top two-thirds
+            const size = Math.round(rand(10,18));
+            d.style.width = size + 'px'; d.style.height = size + 'px';
+            d.style.left = rand(6, vw - 40) + 'px';
+            d.style.top = rand(20, vh * 0.7) + 'px';
+            d.style.background = `hsl(${rand(330,360)},80%,60%)`;
+            d.style.animation = `floaty ${rand(3.5,6)}s ease-in-out ${rand(0,2)}s infinite`;
+            heartsEl.appendChild(d);
+        }
+
+        // (Botón de música eliminado — la canción se activa al presionar "Ver sorpresa")
+
+        // Surprise sequence: caos por 3s y luego revelar 'TE AMO' con corazones alrededor
+        function surpriseSequence(){
+                leftNote.style.opacity = '1';
+                leftNote.style.transform = 'translateY(0)';
+
+                // Capturar posición del título para colocar "TE AMO" allí
+                const titleEl = document.querySelector('.title');
+                const titleRect = titleEl ? titleEl.getBoundingClientRect() : null;
+                const centerEl = document.querySelector('.center');
+                // ocultar el centro (transición) después de obtener rect
+                if(centerEl){ centerEl.classList.add('hidden-fade'); setTimeout(()=>{ centerEl.style.display='none'; }, 480); }
+
+                const hearts = Array.from(document.querySelectorAll('.heart'));
+                const rectCard = document.getElementById('card').getBoundingClientRect();
+                const durationChaos = 3000;
+
+            // chaotic movement
+            hearts.forEach((h)=>{
+                const r = h.getBoundingClientRect();
+                h.style.transition = `left ${durationChaos}ms cubic-bezier(.22,.9,.32,1), top ${durationChaos}ms cubic-bezier(.22,.9,.32,1), width ${durationChaos}ms ease, height ${durationChaos}ms ease, transform ${durationChaos}ms ease, opacity ${durationChaos/2}ms ease`;
+                h.style.position = 'fixed';
+                const tx = Math.round(rand(10, window.innerWidth - 30));
+                const ty = Math.round(rand(10, window.innerHeight - 30));
+                const final = Math.round(rand(6,14));
+                setTimeout(()=>{
+                    h.style.left = tx + 'px';
+                    h.style.top = ty + 'px';
+                    h.style.width = final + 'px';
+                    h.style.height = final + 'px';
+                    h.style.opacity = 0.95;
+                    h.style.transform = `rotate(${rand(-30,30)}deg)`;
+                }, 20 + Math.random()*120);
+            });
+
+            // después del caos, mostrar mensaje central y ordenar algunos corazones alrededor
+            setTimeout(()=>{
+                // crear o mostrar elemento central y posicionarlo sobre el título
+                let te = document.querySelector('.te-amo');
+                if(!te){ te = document.createElement('div'); te.className = 'te-amo'; te.textContent = 'TE AMO'; document.body.appendChild(te); }
+                // determinar posición objetivo (centro del título) y posicionar el texto
+                let cx, cy;
+                if(titleRect){
+                    cx = titleRect.left + titleRect.width/2;
+                    cy = titleRect.top + titleRect.height/2;
+                } else {
+                    cx = rectCard.left + rectCard.width/2;
+                    cy = rectCard.top + rectCard.height/2;
+                }
+                te.style.left = cx + 'px';
+                te.style.top = cy + 'px';
+                // animar entrada
+                requestAnimationFrame(()=>{ te.style.opacity = '1'; te.style.transform = 'translate(-50%,-50%) scale(1)'; });
+
+                const ringCount = Math.min(16, hearts.length);
+                const radius = Math.min(140, Math.max(80, Math.round(Math.min(window.innerWidth, window.innerHeight) * 0.18)));
+
+                for(let i=0;i<ringCount;i++){
+                    const h = hearts[i % hearts.length];
+                    const angle = (i/ringCount) * Math.PI * 2 + (Math.random()-0.5)*0.4;
+                    const rx = cx + Math.cos(angle) * (radius + rand(-12,12)) - (parseFloat(h.style.width)||10)/2;
+                    const ry = cy + Math.sin(angle) * (radius + rand(-12,12)) - (parseFloat(h.style.height)||10)/2;
+                    h.style.transition = `left 700ms ease, top 700ms ease, width 700ms ease, height 700ms ease, transform 700ms ease`;
+                    const final = Math.round(rand(10,16));
+                    h.style.width = final + 'px';
+                    h.style.height = final + 'px';
+                    h.style.left = rx + 'px';
+                    h.style.top = ry + 'px';
+                    h.style.transform = 'rotate(-45deg) scale(1)';
+                    h.classList.add('ring-heart');
+                }
+
+                // atenuar los demás
+                for(let i=ringCount;i<hearts.length;i++){
+                    const h = hearts[i];
+                    h.style.transition = 'opacity 800ms ease';
+                    h.style.opacity = 0.12;
+                }
+
+                // pulso en el texto
+                te.animate([
+                    { transform: 'translate(-50%,-50%) scale(1)' },
+                    { transform: 'translate(-50%,-50%) scale(1.06)' },
+                    { transform: 'translate(-50%,-50%) scale(1)' }
+                ], { duration: 1200, iterations: 2 });
+
+            }, durationChaos + 120);
+        }
+
+        surpriseBtn.addEventListener('click', ()=>{
+            try{audio.play().catch(()=>{});}catch(e){}
+            surpriseSequence();
+            surpriseBtn.disabled = true; surpriseBtn.textContent='Enjoy ❤️';
+        });
+
+        // Small accessibility: allow tap anywhere on card to also trigger surprise on first tap
+        let tapped=false;
+        document.getElementById('card').addEventListener('click',(e)=>{
+            if(!tapped){tapped=true; surpriseBtn.click();}
+        },{once:true});
+
+    </script>
+</body>
+</html>
