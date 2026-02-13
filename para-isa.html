@@ -94,6 +94,12 @@
             display:inline-block;margin-top:10px;margin-left:4px;background:var(--accent);color:#fff;border:none;padding:8px 14px;border-radius:10px;font-family:Poppins,Arial,sans-serif;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(233,30,99,0.18);
         }
         .te-amo .sub-btn:active{transform:scale(0.98)}
+        .te-amo .card-btn{
+            display:inline-block;margin-top:10px;margin-left:8px;background:transparent;color:var(--accent);border:1px solid rgba(233,30,99,0.18);padding:8px 14px;border-radius:10px;font-family:Poppins,Arial,sans-serif;font-weight:600;cursor:pointer;
+        }
+        .card-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:40;background:white;padding:18px;border-radius:12px;max-width:92vw;box-shadow:0 30px 80px rgba(0,0,0,0.18);color:#412;}
+        .card-modal .close{position:absolute;right:10px;top:8px;border:none;background:transparent;font-size:18px;cursor:pointer}
+        .card-backdrop{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,0.28);z-index:39}
 
     </style>
 </head>
@@ -187,18 +193,19 @@
             setTimeout(()=>{
                 // crear o mostrar elemento central y posicionarlo sobre el título
                 let te = document.querySelector('.te-amo');
-                if(!te){
-                    te = document.createElement('div');
-                    te.className = 'te-amo';
-                    te.innerHTML = '<div class="te-text">TE AMO</div><button class="sub-btn">enanaa</button>';
-                    document.body.appendChild(te);
-                    // pequeño efecto al pulsar el botón
-                    const subBtn = te.querySelector('.sub-btn');
-                    subBtn.addEventListener('click', (e)=>{
-                        e.currentTarget.animate([{transform:'scale(1)'},{transform:'scale(1.04)'},{transform:'scale(1)'}],{duration:420});
-                        // iniciar secuencia de frases si no se ha iniciado
-                        if(!window._phrasesStarted){ window._phrasesStarted = true; startPhrasesSequence(); }
-                    });
+                    if(!te){
+                        te = document.createElement('div');
+                        te.className = 'te-amo';
+                        te.innerHTML = '<div class="te-text">TE AMO</div><div style="height:6px"></div><button class="sub-btn">enanaa</button><button class="card-btn">carta</button>';
+                        document.body.appendChild(te);
+                        // listeners de botones
+                        const subBtnLocal = te.querySelector('.sub-btn');
+                        const cardBtnLocal = te.querySelector('.card-btn');
+                        subBtnLocal.addEventListener('click', (e)=>{
+                            e.currentTarget.animate([{transform:'scale(1)'},{transform:'scale(1.04)'},{transform:'scale(1)'}],{duration:420});
+                            if(!window._phrasesStarted){ window._phrasesStarted = true; startPhrasesSequence(); }
+                        });
+                        cardBtnLocal.addEventListener('click', ()=>{ showCarta(); });
                 }
                 // determinar posición objetivo (centro del título) y posicionar el texto
                 let cx, cy;
@@ -293,15 +300,17 @@
                     // finalizar secuencia: restaurar TE AMO original y corazones
                     const teRestoreDelay = 600;
                     const te = document.querySelector('.te-amo');
-                    setTimeout(()=>{
+                        setTimeout(()=>{
                         if(!te) return;
-                        te.innerHTML = '<div class="te-text">TE AMO</div><button class="sub-btn">enanaa</button>';
-                        // reponer listener del botón
+                        te.innerHTML = '<div class="te-text">TE AMO</div><div style="height:6px"></div><button class="sub-btn">enanaa</button><button class="card-btn">carta</button>';
+                        // reponer listeners de botones
                         const subBtnNew = te.querySelector('.sub-btn');
+                        const cardBtnNew = te.querySelector('.card-btn');
                         subBtnNew.addEventListener('click', (ev)=>{
                             ev.currentTarget.animate([{transform:'scale(1)'},{transform:'scale(1.04)'},{transform:'scale(1)'}],{duration:420});
                             if(!window._phrasesStarted){ window._phrasesStarted = true; startPhrasesSequence(); }
                         });
+                        cardBtnNew.addEventListener('click', ()=>{ showCarta(); });
 
                         // restaurar apariencia de corazones
                         document.querySelectorAll('.heart').forEach(h=>{
@@ -338,6 +347,76 @@
                 }, 3000);
             }
             nextPhrase();
+        }
+
+        // Modal de carta paginada (muestra exactamente el texto recibido)
+        function showCarta(){
+            if(document.querySelector('.card-backdrop')) return;
+            const pages = [
+`No espero que comprendas lo que te voy a decir, pero a veces siento que yo soy Platón y tú Timeo, por el simple hecho de sentir que naciste de mi imaginación. Cuando duermo son sueños timeicos, porque me da miedo imaginar que la geometría no es perfecta, pero me di cuenta de que tú eres la definición de la perfección: tu cuerpo, tu cara, tu ser, perfectamente construido.`,
+
+`Bueno, no hay nadie perfecto en la vida; bueno, sí, tú, aunque sea en mi punto de vista eres de lo mejor que me ha pasado. Cambié mis pensamientos y mi forma de ser solo por ti. Es que hay algo en ti que quiero descubrir:                                                    Y a veces…`,
+
+`Me gustaría ser Gabriel García Márquez y escribirte Crónica de una muerte anunciada, que a pesar de saber que voy a morir, el día anterior de morir iría por ti, te buscaría, te encontraría, te sacaría y te llevaría a un lugar donde nunca antes imaginaste ir. Te hablaría al oído y te repetiría una y otra vez lo que siento por ti. Miraría las estrellas y desearía no estar aquí. Me gustaría encontrar otro planeta donde nos podamos ir, donde nadie nos pueda ver ni oír, donde los problemas no existan.`,
+
+`Y aun así, antes de morir no soltaría una lágrima, sino una sonrisa al saber que el último día de mi vida lo pasé al lado de ti.`,
+
+`Perdón por ser tan nerd cuando estoy al lado tuyo, es que mi única intención es sorprenderte, que me mires y digas: “Este niño es muy inteligente, maravilloso, distinto, diferente”.`,
+
+`Y la verdad, lo único que pido es que seas feliz conmigo o sin mí.`,
+
+`Oye, Isa, te quería decir que te admiro demasiado, no sé los problemas que hayas pasado, pero eres demasiado fuerte y no pienses que llorar es una bobada, por favor.`,
+
+`Perdón por ser tan enredado en mis emociones, es que pienso tantas cosas que no sé en qué orden decirlo.`,
+
+`Oye, Isa, por último quiero que hagamos una promesa.`,
+
+`Isa, yo quiero que seamos una buena pareja y quiero que tengamos una buena comunicación entre los dos, que si en algún momento alguno de los dos tiene un problema nos lo contemos y podamos ayudarnos entre los dos. Y si es algo muy personal y no estamos listos para hablarlo, aunque sea expliquemos la razón del porqué. Eso sí, algo que no podemos ocultar son cosas entre nosotros: si en algún momento estamos bravos o tenemos una diferencia, no lo ocultemos y lo resolvamos hablando. Y otra cosa que no podemos discutir es si alguno de los dos se llega a hacer daño físico por cualquier razón.`,
+
+`Nos apoyemos los dos.`,
+
+`¿Te parece?`
+            ];
+
+            const backdrop = document.createElement('div'); backdrop.className='card-backdrop';
+            const modal = document.createElement('div'); modal.className='card-modal';
+            // header y content
+            modal.innerHTML = `<button class="close">✕</button><div style="margin-top:8px;max-height:60vh;overflow:hidden;">` +
+                `<div class="page-container" style="padding:6px 4px;box-sizing:border-box"></div>` +
+                `</div><div style="display:flex;gap:8px;justify-content:center;margin-top:12px"><button class="prev">◀</button><button class="next">▶</button></div>`;
+
+            document.body.appendChild(backdrop); document.body.appendChild(modal);
+
+            const container = modal.querySelector('.page-container');
+            let idx = 0;
+
+            function render(){
+                container.innerHTML = '';
+                const p = document.createElement('div');
+                p.style.fontSize = '18px';
+                p.style.lineHeight = '1.5';
+                p.style.color = '#3b2b2b';
+                p.style.whiteSpace = 'pre-wrap';
+                p.textContent = pages[idx];
+                container.appendChild(p);
+                // ajustar tamaño para caber responsivamente
+                const maxW = Math.min(window.innerWidth * 0.9, 620);
+                p.style.fontSize = (window.innerWidth < 420 ? '16px' : '18px');
+                if(p.scrollHeight > modal.clientHeight * 0.6){
+                    // reducir letra si no cabe
+                    p.style.fontSize = (window.innerWidth < 420 ? '14px' : '16px');
+                }
+            }
+
+            function prev(){ if(idx>0){ idx--; render(); } }
+            function next(){ if(idx < pages.length-1){ idx++; render(); } }
+
+            modal.querySelector('.close').addEventListener('click', ()=>{ modal.remove(); backdrop.remove(); });
+            backdrop.addEventListener('click', ()=>{ modal.remove(); backdrop.remove(); });
+            modal.querySelector('.prev').addEventListener('click', prev);
+            modal.querySelector('.next').addEventListener('click', next);
+
+            render();
         }
 
         surpriseBtn.addEventListener('click', ()=>{
