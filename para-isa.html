@@ -90,6 +90,11 @@
 
         .ring-heart{pointer-events:none}
 
+        .te-amo .sub-btn{
+            display:inline-block;margin-top:10px;margin-left:4px;background:var(--accent);color:#fff;border:none;padding:8px 14px;border-radius:10px;font-family:Poppins,Arial,sans-serif;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(233,30,99,0.18);
+        }
+        .te-amo .sub-btn:active{transform:scale(0.98)}
+
     </style>
 </head>
 <body>
@@ -182,7 +187,19 @@
             setTimeout(()=>{
                 // crear o mostrar elemento central y posicionarlo sobre el título
                 let te = document.querySelector('.te-amo');
-                if(!te){ te = document.createElement('div'); te.className = 'te-amo'; te.textContent = 'TE AMO'; document.body.appendChild(te); }
+                if(!te){
+                    te = document.createElement('div');
+                    te.className = 'te-amo';
+                    te.innerHTML = '<div class="te-text">TE AMO</div><button class="sub-btn">enanaa</button>';
+                    document.body.appendChild(te);
+                    // pequeño efecto al pulsar el botón
+                    const subBtn = te.querySelector('.sub-btn');
+                    subBtn.addEventListener('click', (e)=>{
+                        e.currentTarget.animate([{transform:'scale(1)'},{transform:'scale(1.04)'},{transform:'scale(1)'}],{duration:420});
+                        // iniciar secuencia de frases si no se ha iniciado
+                        if(!window._phrasesStarted){ window._phrasesStarted = true; startPhrasesSequence(); }
+                    });
+                }
                 // determinar posición objetivo (centro del título) y posicionar el texto
                 let cx, cy;
                 if(titleRect){
@@ -230,6 +247,97 @@
                 ], { duration: 1200, iterations: 2 });
 
             }, durationChaos + 120);
+        }
+
+        // Ajustar tamaño de texto para que quepa dentro de .te-amo
+        function fitTextToContainer(container, textNode){
+            // empezar con tamaño grande y reducir hasta que quepa
+            const maxSize = parseInt(getComputedStyle(container).fontSize) || 64;
+            let size = Math.min(72, maxSize);
+            textNode.style.fontSize = size + 'px';
+            textNode.style.lineHeight = '1.02';
+            const padding = 24; // espacio interior considerado
+            const cw = container.clientWidth - padding;
+            const ch = container.clientHeight - padding;
+            // si el contenedor aún no tiene dimensiones, dar valores por defecto
+            const maxIter = 20;
+            let iter = 0;
+            while(iter < maxIter && (textNode.scrollWidth > cw || textNode.scrollHeight > ch) && size > 10){
+                size -= 2;
+                textNode.style.fontSize = size + 'px';
+                iter++;
+            }
+        }
+
+        // Secuencia de frases: cada una dura ~3000ms
+        function startPhrasesSequence(){
+            const te = document.querySelector('.te-amo');
+            if(!te) return;
+            // ocultar anillo y atenuar corazones excepto los que usaremos
+            document.querySelectorAll('.heart').forEach(h=>{ h.style.transition = 'opacity 400ms ease'; h.style.opacity = 0.06; });
+
+            const phrases = [
+                'vaya...',
+                'tus ojos sí son zafiros deslumbrantes',
+                'poesía barata ¿verdad?'
+            ];
+            // preparar contenedor para frase
+            te.innerHTML = '<div class="phrase" style="display:inline-block;max-width:calc(80vw);max-height:40vh;padding:6px 8px;box-sizing:border-box;font-family:Poppins,Arial,serif;font-weight:600;color:#7b0f37"></div><div style="height:8px"></div>' + (te.querySelector('.sub-btn') ? '' : '');
+            const phraseNode = te.querySelector('.phrase');
+            // asegurar que te sea visible y en posición (ya lo colocamos antes)
+            te.style.opacity = '1'; te.style.transform = 'translate(-50%,-50%) scale(1)';
+
+            let index = 0;
+            function nextPhrase(){
+                if(index >= phrases.length){
+                    // finalizar secuencia: restaurar TE AMO original y corazones
+                    const teRestoreDelay = 600;
+                    const te = document.querySelector('.te-amo');
+                    setTimeout(()=>{
+                        if(!te) return;
+                        te.innerHTML = '<div class="te-text">TE AMO</div><button class="sub-btn">enanaa</button>';
+                        // reponer listener del botón
+                        const subBtnNew = te.querySelector('.sub-btn');
+                        subBtnNew.addEventListener('click', (ev)=>{
+                            ev.currentTarget.animate([{transform:'scale(1)'},{transform:'scale(1.04)'},{transform:'scale(1)'}],{duration:420});
+                            if(!window._phrasesStarted){ window._phrasesStarted = true; startPhrasesSequence(); }
+                        });
+
+                        // restaurar apariencia de corazones
+                        document.querySelectorAll('.heart').forEach(h=>{
+                            h.style.transition = 'opacity 600ms ease, left 600ms ease, top 600ms ease';
+                            h.style.opacity = 0.95;
+                            h.classList.remove('ring-heart');
+                        });
+
+                        // pequeño pulso de restauración
+                        te.animate([{transform:'translate(-50%,-50%) scale(0.98)'},{transform:'translate(-50%,-50%) scale(1.03)'},{transform:'translate(-50%,-50%) scale(1)'}],{duration:700});
+
+                        // permitir que la secuencia se pueda volver a iniciar si se desea
+                        window._phrasesStarted = false;
+                    }, teRestoreDelay);
+                    return;
+                }
+                const text = phrases[index];
+                phraseNode.textContent = text;
+                // ajustar tamaño para que encaje
+                // darle un tamaño base grande usando style
+                phraseNode.style.fontSize = '40px';
+                fitTextToContainer(te, phraseNode);
+                // animación de entrada
+                phraseNode.style.opacity = '0';
+                phraseNode.animate([{opacity:0, transform:'translateY(8px)'},{opacity:1, transform:'translateY(0)'}],{duration:420, easing:'ease'});
+                phraseNode.style.opacity = '1';
+
+                index++;
+                setTimeout(()=>{
+                    // animación de salida
+                    phraseNode.animate([{opacity:1, transform:'translateY(0)'},{opacity:0, transform:'translateY(-8px)'}],{duration:420,easing:'ease'});
+                    phraseNode.style.opacity = '0';
+                    setTimeout(nextPhrase, 420);
+                }, 3000);
+            }
+            nextPhrase();
         }
 
         surpriseBtn.addEventListener('click', ()=>{
