@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Mania — Biblioteca y recomendaciones</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>Book Mania</h1>
+        <p class="tagline">Tu rincón para descubrir lecturas inolvidables</p>
+      </div>
+      <nav class="main-nav" id="main-nav">
+        <ul>
+          <li><a href="#novedades">Novedades</a></li>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#autores">Autores</a></li>
+          <li><a href="#recursos">Recursos</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <h2>Explora, elige y enamórate de nuevas historias</h2>
+        <p>Reseñas, guías de lectura y recomendaciones para todos los gustos.</p>
+        <a href="#novedades" class="btn btn-primary">Ver novedades</a>
+      </div>
+    </section>
+
+    <section id="novedades" class="container section">
+      <h2>Novedades</h2>
+      <p class="muted">Dos libros destacados del mes.</p>
+      <div class="book-grid">
+        <article class="book-card" id="nov-1" data-summary="Una novedad imperdible, mezcla de emoción y reflexión." data-description="Un retrato íntimo y lírico de un hombre que busca amor al final de su vida." data-why="Lee si te gustan las historias sobre memoria y deseo." data-features="tema del amor en la vejez|narracion reflexiva|personaje principal complejo">
+          <div class="book-thumb"><img src="fotos/mis putas tristes.png" alt="Novedad 1"></div>
+          <h4>Memoria de mis putas tristes</h4>
+          <p class="book-author">Gabriel García Márquez</p>
+        </article>
+        <article class="book-card" id="nov-2" data-summary="Historia que está dando de qué hablar por su originalidad." data-description="Relato transformador sobre identidad y aislamiento." data-why="Ideal para quienes disfrutan del existencialismo y lo insólito." data-features="Original|Premiado|Lectura amena">
+          <div class="book-thumb"><img src="fotos/la metamorfosis.png" alt="Novedad 2"></div>
+          <h4>La metamorfosis</h4>
+          <p class="book-author">Franz Kafka</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="catalogo" class="container section">
+      <h2>Catálogo</h2>
+      <p class="muted">Explora por género.</p>
+
+      <div class="genre-nav" role="tablist" aria-label="Géneros">
+        <button class="genre-btn" data-target="genre-drama">Drama (5)</button>
+        <button class="genre-btn" data-target="genre-romance">Romance (3)</button>
+        <button class="genre-btn" data-target="genre-triller">Triller (3)</button>
+        <button class="genre-btn" data-target="genre-realismo">Realismo (3)</button>
+        <button class="genre-btn" data-target="genre-scifi">Ciencia ficción (2)</button>
+        <button class="genre-btn" data-target="genre-fantasia">Fantasía (3)</button>
+      </div>
+
+      <!-- Drama (5) -->
+      <div class="genre-section" id="genre-drama">
+        <h3>Drama</h3>
+        <div class="book-grid">
+          <article class="book-card" data-genre="Drama" id="book-01" data-summary="Novela sobre un coronel y la espera." data-description="Un coronel espera una pensión que nunca llega; retrato de la soledad y la dignidad." data-why="Lee para conocer una crítica social compacta y emotiva." data-features="Clásico|Realismo social">
+            <div class="book-thumb"><img src="fotos/Coronel.png" alt="El coronel no tiene quien le escriba"></div>
+            <h4>El coronel no tiene quien le escriba</h4>
+            <p class="book-author">Gabriel García Márquez</p>
+          </article>
+          <article class="book-card" data-genre="Drama" id="book-02" data-summary="Relato fantástico y perturbador." data-description="La transformación física y social de un hombre en insecto, y sus consecuencias." data-why="Lee si te interesan las metáforas sobre identidad y alienación." data-features="Clásico|Existencial">
+            <div class="book-thumb"><img src="fotos/la metamorfosis.png" alt="La metamorfosis"></div>
+            <h4>La metamorfosis</h4>
+            <p class="book-author">Franz Kafka</p>
+          </article>
+          <article class="book-card" data-genre="Drama" id="book-03" data-summary="Novela sobre violencia urbana y redención." data-description="Una mirada cruda a la violencia en la ciudad y sus efectos en las personas." data-why="Recomendado para lectores que buscan narrativa social y directa." data-features="Crítica social|Realismo">
+            <div class="book-thumb"><img src="fotos/la virgen de los sicarios.png" alt="La virgen de los sicarios"></div>
+            <h4>La virgen de los sicarios</h4>
+            <p class="book-author">Fernando Vallejo</p>
+          </article>
+          <article class="book-card" data-genre="Drama" id="book-04" data-summary="Novela sobre el amor tardío y la memoria." data-description="Historia íntima de un hombre que descubre el amor en la vejez." data-why="Perfecta para quienes disfrutan de prosa lírica y melancólica." data-features="Emotivo|Estilo lírico">
+            <div class="book-thumb"><img src="fotos/mis putas tristes.png" alt="Memoria de mis putas tristes"></div>
+            <h4>Memoria de mis putas tristes</h4>
+            <p class="book-author">Gabriel García Márquez</p>
+          </article>
+          <article class="book-card" data-genre="Drama" id="book-05" data-summary="Novela oscura que explora el mal y la culpa." data-description="Relato que entrelaza crímenes y psicología para mostrar el lado oscuro de la sociedad." data-why="Lee si te atraen las tramas psicológicas y tensas." data-features="Impactante|Psicológico">
+            <div class="book-thumb"><img src="fotos/satanas.png" alt="Satanás"></div>
+            <h4>Satanás</h4>
+            <p class="book-author">Mario Mendoza</p>
+          </article>
+       
+        </div>
+      </div>
+
+      <!-- Romance (3) -->
+      <div class="genre-section" id="genre-romance">
+        <h3>Romance</h3>
+        <div class="book-grid">
+          <article class="book-card" data-genre="Romance" id="book-08" data-summary="Amor en tiempos y distancia." data-description="Una historia de amor que atraviesa el tiempo y la separación." data-why="Lee para disfrutar una épica romántica sobre lealtad y paciencia." data-features="Clásico|Épico">
+            <div class="book-thumb"><img src="fotos/el amor en los tiempos de colera.png" alt="El amor en los tiempos del cólera"></div>
+            <h4>El amor en los tiempos del cólera</h4>
+            <p class="book-author">Gabriel García Márquez</p>
+          </article>
+          <article class="book-card" data-genre="Romance" id="book-09" data-summary="Novela sobre el amor tardío y la memoria." data-description="Reflexión sobre el deseo y la vejez narrada con ternura." data-why="Ideal para lectores que valoran la prosa sensible y la nostalgia." data-features="Emotivo|Estilo lírico">
+            <div class="book-thumb"><img src="fotos/mis putas tristes.png" alt="Memoria de mis putas tristes"></div>
+            <h4>Memoria de mis putas tristes</h4>
+            <p class="book-author">Gabriel García Márquez</p>
+          </article>
+          <article class="book-card" data-genre="Romance" id="book-10" data-summary="Saga familiar y pasiones a lo largo de generaciones." data-description="Épica familiar que mezcla realismo mágico y destino colectivo." data-why="Lee si te gustan las sagas ricas en personajes y simbolismo." data-features="Clásico|Magistral">
+            <div class="book-thumb"><img src="fotos/cien años de soledad.png" alt="Cien años de soledad"></div>
+            <h4>Cien años de soledad</h4>
+            <p class="book-author">Gabriel García Márquez</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Triller (3) -->
+      <div class="genre-section" id="genre-triller">
+        <h3>Triller</h3>
+        <div class="book-grid">
+          <article class="book-card" data-genre="Triller" id="book-11" data-summary="Novela de suspense y misterio." data-description="Suspense psicológico con personajes atrapados en una red de secretos." data-why="Lee para una trama tensa y sorprendente." data-features="Tensión|Giros">
+            <div class="book-thumb"><img src="fotos/el jardin de las mariposas.png" alt="El jardín de las mariposas"></div>
+            <h4>El jardín de las mariposas</h4>
+            <p class="book-author">[Autor desconocido]</p>
+          </article>
+          <article class="book-card" data-genre="Triller" id="book-12" data-summary="Novela que explora el mal y la culpa." data-description="Relato que indaga en las causas y consecuencias del crimen." data-why="Recomendado si buscas tramas introspectivas y oscuras." data-features="Impactante|Psicológico">
+            <div class="book-thumb"><img src="fotos/satanas.png" alt="Satanás"></div>
+            <h4>Satanás</h4>
+            <p class="book-author">Mario Mendoza</p>
+          </article>
+          <article class="book-card" data-genre="Triller" id="book-13" data-summary="Crónica que anticipa un desenlace inevitable." data-description="Crónica de un hecho trágico donde todos conocen el final." data-why="Lee para apreciar cómo la tensión se construye con lo cotidiano." data-features="Clásico|Sorpresa">
+            <div class="book-thumb"><img src="fotos/cronicas de una muerte anunciada.png" alt="Crónica de una muerte anunciada"></div>
+            <h4>Crónica de una muerte anunciada</h4>
+            <p class="book-author">Gabriel García Márquez</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Realismo (3) -->
+      <div class="genre-section" id="genre-realismo">
+        <h3>Realismo</h3>
+        <div class="book-grid">
+          <article class="book-card" data-genre="Realismo" id="book-14" data-summary="Novela sobre un coronel y la espera." data-description="Retrato íntimo de la pobreza y la resistencia en un pueblo olvidado." data-why="Lee para conocer un estilo sobrio y profundamente humano." data-features="Clásico|Realismo social">
+            <div class="book-thumb"><img src="fotos/Coronel.png" alt="El coronel no tiene quien le escriba"></div>
+            <h4>El coronel no tiene quien le escriba</h4>
+            <p class="book-author">Gabriel García Márquez</p>
+          </article>
+          <article class="book-card" data-genre="Realismo" id="book-15" data-summary="Novela sobre violencia urbana y redención." data-description="Narración cruda que examina la violencia y sus raíces sociales." data-why="Recomendado para lectores que buscan verdad y crítica social." data-features="Crítica social|Realismo">
+            <div class="book-thumb"><img src="fotos/la virgen de los sicarios.png" alt="La virgen de los sicarios"></div>
+            <h4>La virgen de los sicarios</h4>
+            <p class="book-author">Fernando Vallejo</p>
+          </article>
+          <article class="book-card" data-genre="Realismo" id="book-16" data-summary="Novela oscura que explora el mal y la culpa." data-description="Historia que mezcla hechos violentos con reflexiones morales." data-why="Lee si te interesan las complejidades morales en la ficción." data-features="Impactante|Psicológico">
+            <div class="book-thumb"><img src="fotos/satanas.png" alt="Satanás"></div>
+            <h4>Satanás</h4>
+            <p class="book-author">Mario Mendoza</p>
+          </article>
+        
+        </div>
+      </div>
+
+      <!-- Ciencia ficción (2) -->
+      <div class="genre-section" id="genre-scifi">
+        <h3>Ciencia ficción</h3>
+        <div class="book-grid">
+          <article class="book-card" data-genre="Ciencia ficción" id="book-18" data-summary="Especulación futura sobre la evolución humana." data-description="Colección de escenarios que imaginan futuros posibles para la humanidad." data-why="Lee si te atrae la ciencia ficción especulativa y las ideas audaces." data-features="Espacial|Reflexivo">
+            <div class="book-thumb"><img src="fotos/all tomorrows.png" alt="All Tomorrows"></div>
+            <h4>All Tomorrows</h4>
+            <p class="book-author">[Autor desconocido]</p>
+          </article>
+          <article class="book-card" data-genre="Ciencia ficción" id="book-19" data-summary="Aventura subterránea y descubrimientos." data-description="Viaje científico y aventurero hacia el centro del planeta, lleno de maravillas." data-why="Perfecto para lectores de aventuras clásicas y curiosidad científica." data-features="Aventura|Clásico">
+            <div class="book-thumb"><img src="fotos/viaje al centro de la tierra.png" alt="Viaje al centro de la Tierra"></div>
+            <h4>Viaje al centro de la Tierra</h4>
+            <p class="book-author">Julio Verne</p>
+          </article>
+          
+        </div>
+      </div>
+
+      <!-- Fantasía (2) -->
+      <div class="genre-section" id="genre-fantasia">
+        <h3>Fantasía</h3>
+        <div class="book-grid">
+          <article class="book-card" data-genre="Fantasía" id="book-21" data-summary="Historia poética y sencilla con grandes lecciones." data-description="Pequeñas reflexiones sobre la amistad, el amor y la pérdida." data-why="Lee en cualquier momento para ver la vida desde otra perspectiva." data-features="Clásico|Infantil">
+            <div class="book-thumb"><img src="fotos/principito.png" alt="El principito"></div>
+            <h4>El principito</h4>
+            <p class="book-author">Antoine de Saint-Exupéry</p>
+          </article>
+          <article class="book-card" data-genre="Fantasía" id="book-22" data-summary="Cuento fantástico sobre deseos y consecuencias." data-description="Relato breve sobre un hombre que obtiene lo que desea, con un coste moral." data-why="Recomendado para quienes disfrutan de fábulas con moraleja." data-features="Clásico|Moral">
+            <div class="book-thumb"><img src="fotos/diablo en la botella.png" alt="El diablo en la botella"></div>
+            <h4>El diablo en la botella</h4>
+            <p class="book-author">Robert Louis Stevenson</p>
+          </article>
+          <article class="book-card" data-genre="Fantasía" id="book-23" data-summary="Saga familiar y pasiones a lo largo de generaciones." data-description="Novela multigeneracional que mezcla lo fantástico con lo cotidiano." data-why="Lee para disfrutar de una prosa rica y un universo propio." data-features="Clásico|Magistral">
+            <div class="book-thumb"><img src="fotos/cien años de soledad.png" alt="Cien años de soledad"></div>
+            <h4>Cien años de soledad</h4>
+            <p class="book-author">Gabriel García Márquez</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="autores" class="container section">
+      <h2>Autores destacados</h2>
+      <div class="authors">
+        <article class="author-card" id="author-ggm" data-description="Escritor colombiano, figura central del realismo mágico." data-why="Lee a GGM por su prosa rica, sus mitos familiares y su visión de América Latina.">
+          <div class="avatar"><img src="fotos/gabriel.png" alt="Gabriel García Márquez"></div>
+          <h4>Gabriel García Márquez</h4>
+          <p class="bio">Nació en Colombia; Nobel de Literatura (1982). Autor de novelas emblemáticas como Cien años de soledad, que mezclan historia, memoria y mito.</p>
+        </article>
+
+        <article class="author-card" id="author-kafka" data-description="Escritor checo de lengua alemana, autor de relatos sobre la alienación." data-why="Lee a Kafka para experimentar la narrativa del absurdo y las preguntas sobre identidad y culpa.">
+          <div class="avatar"><img src="fotos/Franz Kafka.png" alt="Franz Kafka"></div>
+          <h4>Franz Kafka</h4>
+          <p class="bio">Escritor nacido en Praga; conocido por su estilo inquietante y sus obras como La metamorfosis, que exploran la burocracia, el aislamiento y lo absurdo.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="recursos" class="container section">
+      <h2>Recursos</h2>
+      <ul class="resources">
+        <li>Guías de lectura por género</li>
+        <li>lee a tu gusto </li>
+        <li>informate sobre tus libros </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Book Mania — Recursos y reseñas literarias</p>
+    </div>
+  </footer>
+  <!-- Modal de detalles -->
+  <div class="modal" id="book-modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Cerrar">×</button>
+      <div class="modal-body">
+        <div class="modal-left">
+          <img id="modal-img" src="" alt="Portada">
+        </div>
+        <div class="modal-right">
+          <h3 id="modal-title">Título</h3>
+          <p class="modal-author" id="modal-author">Autor</p>
+          <p id="modal-summary">Resumen</p>
+          <!-- nueva sección: descripción y motivos -->
+          <h4>Descripción</h4>
+          <p id="modal-desc">Texto breve que describe el libro.</p>
+          <h4>¿Por qué leerlo?</h4>
+          <p id="modal-why">Razón para escoger esta lectura.</p>
+          <h4>Características</h4>
+          <ul id="modal-features"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('main-nav');
+    toggle.addEventListener('click', ()=>nav.classList.toggle('open'));
+
+    // Géneros interactivos: scroll suave y marcar activo
+    const genreBtns = document.querySelectorAll('.genre-btn');
+    genreBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const targetId = btn.dataset.target;
+        const targetEl = document.getElementById(targetId);
+        if(targetEl){
+          targetEl.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+        genreBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // Modal de libro
+    const modal = document.getElementById('book-modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalAuthor = document.getElementById('modal-author');
+    const modalSummary = document.getElementById('modal-summary');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalWhy = document.getElementById('modal-why');
+    const modalFeatures = document.getElementById('modal-features');
+    const modalClose = document.getElementById('modal-close');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+
+    function openModal(data){
+      modalImg.src = data.imgSrc || '';
+      modalImg.alt = data.imgAlt || '';
+      modalTitle.textContent = data.title || '';
+      modalAuthor.textContent = data.author || '';
+      modalSummary.textContent = data.summary || '';
+      modalDesc.textContent = data.description || '';
+      modalWhy.textContent = data.why || '';
+      modalFeatures.innerHTML = '';
+      (data.features||[]).forEach(f=>{
+        const li = document.createElement('li'); li.textContent = f; modalFeatures.appendChild(li);
+      });
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+    // Agregar listeners a cada tarjeta de libro
+    const bookCards = document.querySelectorAll('.book-card');
+    bookCards.forEach(card=>{
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', ()=>{
+        const title = card.querySelector('h4')?.textContent || '';
+        const author = card.querySelector('.book-author')?.textContent || '';
+        const imgEl = card.querySelector('.book-thumb img');
+        const imgSrc = imgEl ? imgEl.src : '';
+        const imgAlt = imgEl ? imgEl.alt : '';
+        const summary = card.dataset.summary || '';
+        const description = card.dataset.description || '';
+        const why = card.dataset.why || '';
+        const features = (card.dataset.features || '').split('|').map(s=>s.trim()).filter(Boolean);
+        openModal({title,author,imgSrc,imgAlt,summary,description,why,features});
+      });
+    });
+
+    // Opcional: si vienes con hash en URL, activar ese género
+    window.addEventListener('load', ()=>{
+      const h = location.hash.replace('#','');
+      if(h){
+        const btn = document.querySelector(`.genre-btn[data-target="${h}"]`);
+        if(btn) btn.click();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Florería Roma</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header class="site-header">
+		<div class="container header-inner">
+			<div class="brand">
+				<h1>Florería Roma</h1>
+				<p class="tagline">Arreglos florales y jardinería con cariño</p>
+			</div>
+			<nav class="main-nav" id="main-nav">
+				<ul>
+					<li><a href="#catalogo">Catálogo</a></li>
+					<li><a href="#sobre-nosotros">Nosotros</a></li>
+					<li><a href="#contacto">Contacto</a></li>
+				</ul>
+			</nav>
+			<button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">☰</button>
+		</div>
+	</header>
+
+	<main>
+		<section class="hero">
+			<div class="container hero-inner">
+				<h2>Flores frescas, diseño profesional</h2>
+				<p>En <strong>Florería Roma</strong> combinamos frescura y estilo para cada ocasión.</p>
+				<a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
+			</div>
+		</section>
+
+		<section id="catalogo" class="catalog container">
+			<h2>Catálogo</h2>
+			<p class="catalog-intro">Haz clic en un producto para más detalles. (Sustituye las imágenes por las tuyas.)</p>
+			<div class="grid">
+				<article class="card">
+					<div class="card-image"><img src="images/placeholder-1.jpg" alt="Producto 1"></div>
+					<div class="card-body">
+						<h3>Ramo Primavera</h3>
+						<p class="descr">Descripción breve del arreglo. Tamaño y flores principales.</p>
+						<div class="card-meta">
+							<span class="price">$XX</span>
+							<a class="btn btn-outline" href="#">Ver detalles</a>
+						</div>
+					</div>
+				</article>
+
+				<article class="card">
+					<div class="card-image"><img src="images/placeholder-2.jpg" alt="Producto 2"></div>
+					<div class="card-body">
+						<h3>Centro de Mesa</h3>
+						<p class="descr">Ideal para eventos y mesas principales.</p>
+						<div class="card-meta">
+							<span class="price">$XX</span>
+							<a class="btn btn-outline" href="#">Ver detalles</a>
+						</div>
+					</div>
+				</article>
+
+				<article class="card">
+					<div class="card-image"><img src="images/placeholder-3.jpg" alt="Producto 3"></div>
+					<div class="card-body">
+						<h3>Ramo Romántico</h3>
+						<p class="descr">Selección clásica en tonos suaves.</p>
+						<div class="card-meta">
+							<span class="price">$XX</span>
+							<a class="btn btn-outline" href="#">Ver detalles</a>
+						</div>
+					</div>
+				</article>
+
+				<article class="card">
+					<div class="card-image"><img src="images/placeholder-4.jpg" alt="Producto 4"></div>
+					<div class="card-body">
+						<h3>Maceta Verde</h3>
+						<p class="descr">Plantas y macetas para el hogar u oficina.</p>
+						<div class="card-meta">
+							<span class="price">$XX</span>
+							<a class="btn btn-outline" href="#">Ver detalles</a>
+						</div>
+					</div>
+				</article>
+
+				<article class="card">
+					<div class="card-image"><img src="images/placeholder-5.jpg" alt="Producto 5"></div>
+					<div class="card-body">
+						<h3>Arreglo Especial</h3>
+						<p class="descr">Diseño personalizado para ocasiones especiales.</p>
+						<div class="card-meta">
+							<span class="price">$XX</span>
+							<a class="btn btn-outline" href="#">Ver detalles</a>
+						</div>
+					</div>
+				</article>
+
+				<article class="card">
+					<div class="card-image"><img src="images/placeholder-6.jpg" alt="Producto 6"></div>
+					<div class="card-body">
+						<h3>Ramo de Lujo</h3>
+						<p class="descr">Combinación premium para regalar.</p>
+						<div class="card-meta">
+							<span class="price">$XX</span>
+							<a class="btn btn-outline" href="#">Ver detalles</a>
+						</div>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section id="sobre-nosotros" class="about container">
+			<h2>Sobre nosotros</h2>
+			<p>Florería Roma ofrece arreglos, asesoría en jardinería y servicio a domicilio. Calidad y trato cercano.</p>
+		</section>
+
+		<section id="contacto" class="contact container">
+			<h2>Contacto</h2>
+			<p>Email: contacto@floreriaroma.example · Tel: 555-1234</p>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container">
+			<p>© 2026 Florería Roma — Todos los derechos reservados</p>
+		</div>
+	</footer>
+
+	<script>
+		const toggle = document.getElementById('nav-toggle');
+		const nav = document.getElementById('main-nav');
+		toggle.addEventListener('click', ()=>{
+			nav.classList.toggle('open');
+		});
+	</script>
+</body>
+</html>
